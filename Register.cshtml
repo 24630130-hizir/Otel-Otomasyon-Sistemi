@@ -1,0 +1,142 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Üye Ol | Kingo Luxury";
+}
+
+<style>
+    .auth-bg {
+        position: fixed; inset: 0; z-index: -1;
+        background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #030712 100%);
+    }
+    .auth-bg::before {
+        content: ''; position: absolute; inset: 0;
+        background: radial-gradient(ellipse at 70% 50%, rgba(212,175,55,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.04) 0%, transparent 50%);
+    }
+    .auth-wrap { min-height: 85vh; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+    .auth-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 28px; padding: 48px 40px;
+        width: 100%; max-width: 440px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .auth-logo {
+        width: 70px; height: 70px;
+        background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+        border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 20px;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 24px; font-size: 2rem; color: #d4af37;
+    }
+    .auth-input-wrap { position: relative; margin-bottom: 14px; }
+    .auth-input-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #d4af37; font-size: 0.95rem; }
+    .auth-input {
+        width: 100%; background: rgba(0,0,0,0.3);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px; color: #fff;
+        padding: 14px 16px 14px 46px;
+        outline: none; transition: 0.3s; font-size: 0.9rem;
+    }
+    .auth-input:focus { border-color: #d4af37; background: rgba(0,0,0,0.4); }
+    .auth-input::placeholder { color: #475569; }
+    .btn-auth {
+        width: 100%; background: linear-gradient(135deg, #d4af37, #aa8928);
+        color: #000; font-weight: 800; border: none;
+        padding: 15px; border-radius: 14px;
+        cursor: pointer; transition: 0.3s;
+        font-size: 0.9rem; letter-spacing: 1.5px; margin-top: 8px;
+    }
+    .btn-auth:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212,175,55,0.3); }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+    .divider span { color: #475569; font-size: 0.75rem; }
+    .benefit-row { display: flex; gap: 16px; margin-bottom: 24px; }
+    .benefit-item { flex: 1; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; padding: 12px 8px; text-align: center; }
+    .benefit-item i { color: #d4af37; font-size: 1.2rem; display: block; margin-bottom: 4px; }
+    .benefit-item span { color: #94a3b8; font-size: 0.65rem; }
+</style>
+
+<div class="auth-bg"></div>
+<div class="auth-wrap">
+    <div class="auth-card animate__animated animate__fadeInUp">
+        <div class="auth-logo"><i class="bi bi-person-plus-fill"></i></div>
+        <div class="text-center mb-4">
+            <h2 class="fw-900 mb-1" style="background:linear-gradient(to bottom,#fff 30%,#d4af37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" id="rg-title">YENİ ÜYELİK</h2>
+            <p class="text-white-50 small" id="rg-sub">Avantajlı rezervasyon için üye olun</p>
+        </div>
+
+        <div class="benefit-row">
+            <div class="benefit-item"><i class="bi bi-percent"></i><span id="rg-b1">%15 İndirim</span></div>
+            <div class="benefit-item"><i class="bi bi-ticket-perforated"></i><span id="rg-b2">Bilet Kredisi</span></div>
+            <div class="benefit-item"><i class="bi bi-clock-history"></i><span id="rg-b3">Geçmiş Rezervasyon</span></div>
+        </div>
+
+        <form id="registerForm">
+            <div class="auth-input-wrap">
+                <i class="bi bi-person"></i>
+                <input type="text" id="reg-username" class="auth-input" placeholder="Kullanıcı Adı" required>
+            </div>
+            <div class="auth-input-wrap">
+                <i class="bi bi-envelope"></i>
+                <input type="email" id="reg-email" class="auth-input" placeholder="E-posta Adresi" required>
+            </div>
+            <div class="auth-input-wrap">
+                <i class="bi bi-lock"></i>
+                <input type="password" id="reg-password" class="auth-input" placeholder="Şifre" required>
+            </div>
+            <div class="auth-input-wrap">
+                <i class="bi bi-lock-fill"></i>
+                <input type="password" id="reg-password-confirm" class="auth-input" placeholder="Şifre Tekrarı" required>
+            </div>
+            <button type="submit" class="btn-auth" id="rg-btn">KAYIT OL</button>
+        </form>
+
+        <div class="divider"><span>veya</span></div>
+        <div class="text-center small">
+            <span class="text-white-50" id="rg-has-acc">Zaten üye misiniz?</span>
+            <a asp-action="Login" class="fw-700 text-decoration-none ms-1" style="color:#d4af37;" id="rg-login">Giriş Yapın</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    $("#registerForm").on("submit", function(e) {
+        e.preventDefault();
+        const username = $("#reg-username").val();
+        const email = $("#reg-email").val();
+        const pass = $("#reg-password").val();
+        const confirmPass = $("#reg-password-confirm").val();
+        if(!username || !email || !pass) return Swal.fire('Uyarı', 'Lütfen tüm alanları doldurun.', 'warning');
+        if(pass !== confirmPass) return Swal.fire('Uyarı', 'Şifreler uyuşmuyor.', 'warning');
+        $.post("/Account/Register", { username, email, password: pass }, function(res) {
+            if(res.success) {
+                Swal.fire({ title: 'Başarıyla Kayıt Oldunuz!', text: res.message, icon: 'success', background: '#0f172a', color: '#fff', confirmButtonColor: '#d4af37' }).then(() => location.href = '/Account/Login');
+            } else {
+                Swal.fire({ title: 'Hata', text: res.message, icon: 'error', background: '#0f172a', color: '#fff', confirmButtonColor: '#d4af37' });
+            }
+        });
+    });
+
+    const rgT = {
+        tr: { title:"YENİ ÜYELİK", sub:"Avantajlı rezervasyon için üye olun", btn:"KAYIT OL", hasAcc:"Zaten üye misiniz?", login:"Giriş Yapın", b1:"%15 İndirim", b2:"Bilet Kredisi", b3:"Geçmiş Rezervasyon" },
+        en: { title:"CREATE ACCOUNT", sub:"Sign up for exclusive benefits", btn:"SIGN UP", hasAcc:"Already a member?", login:"Sign In", b1:"15% Discount", b2:"Ticket Credit", b3:"Reservation History" },
+        de: { title:"KONTO ERSTELLEN", sub:"Registrieren Sie sich für exklusive Vorteile", btn:"REGISTRIEREN", hasAcc:"Bereits Mitglied?", login:"Anmelden", b1:"15% Rabatt", b2:"Ticket-Guthaben", b3:"Buchungsverlauf" },
+        fr: { title:"CRÉER UN COMPTE", sub:"Inscrivez-vous pour des avantages exclusifs", btn:"S'INSCRIRE", hasAcc:"Déjà membre?", login:"Connexion", b1:"15% Réduction", b2:"Crédit Billet", b3:"Historique" },
+        ru: { title:"СОЗДАТЬ АККАУНТ", sub:"Зарегистрируйтесь для эксклюзивных преимуществ", btn:"РЕГИСТРАЦИЯ", hasAcc:"Уже есть аккаунт?", login:"Войти", b1:"Скидка 15%", b2:"Кредит билета", b3:"История бронирований" },
+        es: { title:"CREAR CUENTA", sub:"Regístrate para obtener beneficios exclusivos", btn:"REGISTRARSE", hasAcc:"¿Ya eres miembro?", login:"Iniciar sesión", b1:"15% Descuento", b2:"Crédito de Boleto", b3:"Historial" }
+    };
+    function applyRgLang(lang) {
+        const t = rgT[lang] || rgT['tr'];
+        $("#rg-title").text(t.title); $("#rg-sub").text(t.sub); $("#rg-btn").text(t.btn);
+        $("#rg-has-acc").text(t.hasAcc); $("#rg-login").text(t.login);
+        $("#rg-b1").text(t.b1); $("#rg-b2").text(t.b2); $("#rg-b3").text(t.b3);
+    }
+    $(document).ready(function() {
+        applyRgLang(localStorage.getItem('selectedLang') || 'tr');
+        window.setLanguage = function(l) { applyRgLang(l); };
+    });
+</script>
+}

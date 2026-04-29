@@ -1,0 +1,115 @@
+@model List<dynamic>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Admin Kullanıcılar";
+    var adminRol = Context.Session.GetString("AdminRol");
+}
+
+<div class="row g-4">
+    @if (adminRol == "superadmin")
+    {
+        <div class="col-lg-4">
+            <div class="panel-card">
+                <div class="panel-card-header">
+                    <h6><i class="bi bi-person-plus-fill me-2"></i>Yeni Admin Ekle</h6>
+                </div>
+                <div class="panel-card-body">
+                    <div class="field-group mb-3">
+                        <label style="font-size:0.7rem;letter-spacing:1px;color:rgba(255,255,255,0.5);text-transform:uppercase;display:block;margin-bottom:6px;">Kullanıcı Adı</label>
+                        <input type="text" id="newAd" class="form-dark" placeholder="Kullanıcı adı..." />
+                    </div>
+                    <div class="field-group mb-3">
+                        <label style="font-size:0.7rem;letter-spacing:1px;color:rgba(255,255,255,0.5);text-transform:uppercase;display:block;margin-bottom:6px;">Şifre</label>
+                        <input type="password" id="newSifre" class="form-dark" placeholder="Şifre..." />
+                    </div>
+                    <div class="field-group mb-4">
+                        <label style="font-size:0.7rem;letter-spacing:1px;color:rgba(255,255,255,0.5);text-transform:uppercase;display:block;margin-bottom:6px;">Rol</label>
+                        <select id="newRol" class="form-dark">
+                            <option value="admin">Admin</option>
+                            <option value="moderator">Moderatör</option>
+                        </select>
+                    </div>
+                    <button class="btn-gold w-100" onclick="adminEkle()"><i class="bi bi-plus-circle me-2"></i>Ekle</button>
+                    <div id="ekleMsg" style="margin-top:10px;font-size:0.78rem;display:none;"></div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="@(adminRol == "superadmin" ? "col-lg-8" : "col-12")">
+        <div class="panel-card">
+            <div class="panel-card-header">
+                <h6><i class="bi bi-people-fill me-2"></i>Mevcut Adminler</h6>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="admin-table" id="adminTable">
+                    <thead>
+                        <tr><th>ID</th><th>Kullanıcı Adı</th><th>Rol</th>@if(adminRol=="superadmin"){<th>İşlem</th>}</tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var u in Model)
+                        {
+                            var bc = u.Rol == "superadmin" ? "badge-superadmin" : (u.Rol == "admin" ? "badge-admin" : "badge-moderator");
+                            var rl = u.Rol == "superadmin" ? "Süperadmin" : (u.Rol == "admin" ? "Admin" : "Moderatör");
+                            <tr id="row-@u.Id">
+                                <td style="color:#475569;font-weight:700;">@u.Id</td>
+                                <td style="font-weight:600;">@u.KullaniciAd</td>
+                                <td><span class="admin-badge @bc">@rl</span></td>
+                                @if (adminRol == "superadmin" && u.Rol != "superadmin")
+                                {
+                                    <td><button class="btn-danger-sm" onclick="adminSil(@u.Id)"><i class="bi bi-trash me-1"></i>Sil</button></td>
+                                }
+                                else if (adminRol == "superadmin")
+                                {
+                                    <td><span style="color:rgba(255,255,255,0.2);font-size:0.72rem;">—</span></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function adminEkle() {
+        const ad = $('#newAd').val().trim();
+        const sifre = $('#newSifre').val().trim();
+        const rol = $('#newRol').val();
+        if (!ad || !sifre) { showMsg('Tüm alanları doldurun.', false); return; }
+
+        $.post('/Admin/AdminEkle', { kullaniciAd: ad, sifre: sifre, rol: rol }, function(res) {
+            if (res.success) {
+                showMsg('Admin başarıyla eklendi. Sayfa yenileniyor...', true);
+                setTimeout(() => location.reload(), 1200);
+            } else {
+                showMsg(res.message || 'Hata oluştu.', false);
+            }
+        });
+    }
+
+    function adminSil(id) {
+        Swal.fire({
+            title: 'Emin misiniz?', text: 'Bu admin kullanıcısı silinecek.',
+            icon: 'warning', showCancelButton: true,
+            confirmButtonText: 'Evet, Sil', cancelButtonText: 'Vazgeç',
+            confirmButtonColor: '#ef4444', background: '#0f172a', color: '#fff'
+        }).then(r => {
+            if (!r.isConfirmed) return;
+            $.post('/Admin/AdminSil', { id: id }, function(res) {
+                if (res.success) {
+                    $('#row-' + id).fadeOut(300, function() { $(this).remove(); });
+                } else {
+                    Swal.fire('Hata', res.message, 'error');
+                }
+            });
+        });
+    }
+
+    function showMsg(msg, ok) {
+        $('#ekleMsg').text(msg).css('color', ok ? '#10b981' : '#ef4444').show();
+    }
+</script>
+}

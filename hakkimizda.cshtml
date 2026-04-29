@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Hakkımızda - Kingo Luxury";
+}
+
+<style>
+    .about-hero {
+        position: relative;
+        min-height: 340px;
+        background: linear-gradient(120deg, rgba(3,7,18,0.92) 60%, rgba(212,175,55,0.08) 100%),
+            url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1920') center/cover no-repeat;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 0 0 40px 40px;
+        margin-bottom: 60px;
+        overflow: hidden;
+    }
+    .about-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(to bottom, transparent 60%, #030712 100%);
+    }
+    .about-hero-content { position: relative; z-index: 2; text-align: center; }
+    .gold-line { width: 60px; height: 3px; background: linear-gradient(90deg, #d4af37, transparent); margin: 0 auto 20px; border-radius: 2px; }
+    .about-glass {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 40px;
+        backdrop-filter: blur(20px);
+        transition: border-color 0.3s;
+    }
+    .about-glass:hover { border-color: rgba(212,175,55,0.3); }
+    .about-icon {
+        width: 64px; height: 64px;
+        background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+        border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 18px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.8rem; color: #d4af37; margin-bottom: 20px;
+    }
+    .stat-box {
+        background: rgba(212,175,55,0.06);
+        border: 1px solid rgba(212,175,55,0.2);
+        border-radius: 20px; padding: 30px; text-align: center;
+    }
+    .stat-num { font-size: 2.5rem; font-weight: 900; color: #d4af37; line-height: 1; }
+    .team-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px; overflow: hidden; transition: 0.3s;
+    }
+    .team-card:hover { border-color: rgba(212,175,55,0.4); transform: translateY(-5px); }
+    .team-img { width: 100%; height: 200px; object-fit: cover; opacity: 0.8; }
+    .team-info { padding: 20px; }
+</style>
+
+<div class="about-hero">
+    <div class="about-hero-content">
+        <div class="gold-line"></div>
+        <h1 class="display-4 fw-900 mb-2" style="background:linear-gradient(to bottom,#fff 30%,#d4af37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" id="ab-title">BİZİM HİKAYEMİZ</h1>
+        <p class="text-white-50" style="letter-spacing:3px;font-size:0.8rem;" id="ab-sub">KINGO LUXURY RESORT — 2025</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row g-4 mb-5">
+        <div class="col-lg-8">
+            <div class="about-glass h-100">
+                <p class="lead text-white-50 mb-4" id="ab-intro">
+                    Kingo Luxury Resort, 2025 yılında misafirlerine ev konforunu lüks bir otel deneyimiyle sunmak amacıyla kurulmuştur. Türkiye'nin dört bir yanında şehirlerin kalbinde konumlanan otellerimizle, her konaklamayı unutulmaz bir anıya dönüştürüyoruz.
+                </p>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="about-icon"><i class="bi bi-eye-fill"></i></div>
+                        <h4 class="text-white fw-700 mb-2" id="ab-vision-title">Vizyonumuz</h4>
+                        <p class="text-white-50" id="ab-vision">Konaklama sektöründe yenilikçi yaklaşımlarımızla, Türkiye'nin en prestijli ve tercih edilen lüks otel zinciri olmak; kaliteyi bir standart haline getirmek.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="about-icon"><i class="bi bi-stars"></i></div>
+                        <h4 class="text-white fw-700 mb-2" id="ab-mission-title">Misyonumuz</h4>
+                        <p class="text-white-50" id="ab-mission">Misafir odaklı hizmet anlayışımızla, her ziyareti unutulmaz bir anıya dönüştürmek ve konforlu yaşam alanlarımızda profesyonel bir ağırlama sunmak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="row g-3">
+                <div class="col-6 col-lg-12">
+                    <div class="stat-box">
+                        <div class="stat-num">81</div>
+                        <div class="text-white-50 small mt-1" id="ab-stat1">İl'de Hizmet</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-12">
+                    <div class="stat-box">
+                        <div class="stat-num">5★</div>
+                        <div class="text-white-50 small mt-1" id="ab-stat2">Lüks Standart</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="stat-box">
+                        <div class="stat-num">24/7</div>
+                        <div class="text-white-50 small mt-1" id="ab-stat3">Kesintisiz Hizmet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-glass mb-5 text-center">
+        <h4 class="text-white fw-700 mb-3" id="ab-why-title">Neden Kingo Luxury?</h4>
+        <div class="row g-4 mt-2">
+            <div class="col-md-3 col-6">
+                <i class="bi bi-wifi fs-2 text-gold d-block mb-2"></i>
+                <div class="text-white-50 small" id="ab-f1">Ücretsiz Yüksek Hızlı Wi-Fi</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <i class="bi bi-cup-hot fs-2 text-gold d-block mb-2"></i>
+                <div class="text-white-50 small" id="ab-f2">Açık Büfe Kahvaltı</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <i class="bi bi-droplet-half fs-2 text-gold d-block mb-2"></i>
+                <div class="text-white-50 small" id="ab-f3">SPA & Wellness</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <i class="bi bi-car-front fs-2 text-gold d-block mb-2"></i>
+                <div class="text-white-50 small" id="ab-f4">Vale Otopark</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    const abTranslations = {
+        tr: { title:"BİZİM HİKAYEMİZ", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort, 2025 yılında misafirlerine ev konforunu lüks bir otel deneyimiyle sunmak amacıyla kurulmuştur.", visionTitle:"Vizyonumuz", vision:"Konaklama sektöründe yenilikçi yaklaşımlarımızla, Türkiye'nin en prestijli lüks otel zinciri olmak.", missionTitle:"Misyonumuz", mission:"Misafir odaklı hizmet anlayışımızla, her ziyareti unutulmaz bir anıya dönüştürmek.", stat1:"İl'de Hizmet", stat2:"Lüks Standart", stat3:"Kesintisiz Hizmet", whyTitle:"Neden Kingo Luxury?", f1:"Ücretsiz Wi-Fi", f2:"Açık Büfe Kahvaltı", f3:"SPA & Wellness", f4:"Vale Otopark" },
+        en: { title:"OUR STORY", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort was founded in 2025 to offer guests the comfort of home with a luxury hotel experience.", visionTitle:"Our Vision", vision:"To become Turkey's most prestigious luxury hotel chain with our innovative approach.", missionTitle:"Our Mission", mission:"To turn every visit into an unforgettable memory with our guest-focused service.", stat1:"Cities Served", stat2:"Luxury Standard", stat3:"Non-stop Service", whyTitle:"Why Kingo Luxury?", f1:"Free High-Speed Wi-Fi", f2:"Open Buffet Breakfast", f3:"SPA & Wellness", f4:"Valet Parking" },
+        de: { title:"UNSERE GESCHICHTE", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort wurde 2025 gegründet, um Gästen den Komfort eines Zuhauses mit einem Luxushotel-Erlebnis zu bieten.", visionTitle:"Unsere Vision", vision:"Durch unseren innovativen Ansatz die renommierteste Luxushotelkette der Türkei zu werden.", missionTitle:"Unsere Mission", mission:"Jeden Besuch mit unserem gästeorientierten Service in eine unvergessliche Erinnerung zu verwandeln.", stat1:"Städte", stat2:"Luxusstandard", stat3:"24/7 Service", whyTitle:"Warum Kingo Luxury?", f1:"Kostenloses WLAN", f2:"Offenes Frühstücksbuffet", f3:"SPA & Wellness", f4:"Valet-Parken" },
+        fr: { title:"NOTRE HISTOIRE", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort a été fondé en 2025 pour offrir aux clients le confort d'un foyer avec une expérience hôtelière de luxe.", visionTitle:"Notre Vision", vision:"Devenir la chaîne hôtelière de luxe la plus prestigieuse de Turquie.", missionTitle:"Notre Mission", mission:"Transformer chaque visite en un souvenir inoubliable grâce à notre service centré sur les clients.", stat1:"Villes", stat2:"Standard Luxe", stat3:"Service 24/7", whyTitle:"Pourquoi Kingo Luxury?", f1:"Wi-Fi Gratuit", f2:"Petit-déjeuner Buffet", f3:"SPA & Bien-être", f4:"Voiturier" },
+        ru: { title:"НАША ИСТОРИЯ", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort был основан в 2025 году, чтобы предложить гостям домашний комфорт в сочетании с роскошным отельным опытом.", visionTitle:"Наше Видение", vision:"Стать самой престижной сетью роскошных отелей Турции.", missionTitle:"Наша Миссия", mission:"Превращать каждый визит в незабываемое воспоминание.", stat1:"Городов", stat2:"Люкс Стандарт", stat3:"Круглосуточно", whyTitle:"Почему Kingo Luxury?", f1:"Бесплатный Wi-Fi", f2:"Шведский стол", f3:"СПА и велнес", f4:"Парковка с валетом" },
+        es: { title:"NUESTRA HISTORIA", sub:"KINGO LUXURY RESORT — 2025", intro:"Kingo Luxury Resort fue fundado en 2025 para ofrecer a los huéspedes la comodidad del hogar con una experiencia de hotel de lujo.", visionTitle:"Nuestra Visión", vision:"Convertirnos en la cadena hotelera de lujo más prestigiosa de Turquía.", missionTitle:"Nuestra Misión", mission:"Convertir cada visita en un recuerdo inolvidable con nuestro servicio centrado en el huésped.", stat1:"Ciudades", stat2:"Estándar Lujo", stat3:"Servicio 24/7", whyTitle:"¿Por qué Kingo Luxury?", f1:"Wi-Fi Gratis", f2:"Desayuno Buffet", f3:"SPA y Bienestar", f4:"Valet Parking" }
+    };
+    function applyAbLang(lang) {
+        const t = abTranslations[lang] || abTranslations['tr'];
+        $("#ab-title").text(t.title); $("#ab-sub").text(t.sub); $("#ab-intro").text(t.intro);
+        $("#ab-vision-title").text(t.visionTitle); $("#ab-vision").text(t.vision);
+        $("#ab-mission-title").text(t.missionTitle); $("#ab-mission").text(t.mission);
+        $("#ab-stat1").text(t.stat1); $("#ab-stat2").text(t.stat2); $("#ab-stat3").text(t.stat3);
+        $("#ab-why-title").text(t.whyTitle);
+        $("#ab-f1").text(t.f1); $("#ab-f2").text(t.f2); $("#ab-f3").text(t.f3); $("#ab-f4").text(t.f4);
+    }
+    $(document).ready(function() {
+        const lang = localStorage.getItem('selectedLang') || 'tr';
+        applyAbLang(lang);
+        window.setLanguage = function(l) { applyAbLang(l); };
+    });
+</script>
+}

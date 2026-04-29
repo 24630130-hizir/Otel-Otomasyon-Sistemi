@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "İletişim - Kingo Luxury";
+}
+
+<style>
+    .contact-hero {
+        background: linear-gradient(135deg, rgba(3,7,18,0.95) 0%, rgba(212,175,55,0.05) 100%);
+        padding: 80px 0 60px;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    .gold-line { width: 60px; height: 3px; background: linear-gradient(90deg, #d4af37, transparent); margin: 0 auto 20px; border-radius: 2px; }
+    .contact-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px; padding: 40px 30px;
+        text-align: center; transition: 0.3s;
+        height: 100%;
+    }
+    .contact-card:hover { border-color: rgba(212,175,55,0.4); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .contact-icon {
+        width: 70px; height: 70px;
+        background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+        border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 20px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.8rem; color: #d4af37;
+        margin: 0 auto 20px;
+    }
+    .contact-form-wrap {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px; padding: 40px;
+    }
+    .form-field {
+        background: rgba(0,0,0,0.3);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px; color: #fff;
+        padding: 12px 16px; width: 100%;
+        outline: none; transition: 0.3s;
+        font-family: inherit;
+    }
+    .form-field:focus { border-color: #d4af37; background: rgba(0,0,0,0.4); }
+    .form-field::placeholder { color: #64748b; }
+    .btn-send {
+        background: linear-gradient(135deg, #d4af37, #aa8928);
+        color: #000; font-weight: 800; border: none;
+        padding: 14px 40px; border-radius: 12px;
+        cursor: pointer; transition: 0.3s; width: 100%;
+        font-size: 0.9rem; letter-spacing: 1px;
+    }
+    .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+    .map-wrap {
+        border-radius: 24px; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
+        height: 350px; position: relative;
+        background: rgba(255,255,255,0.03);
+    }
+    .map-placeholder {
+        width: 100%; height: 100%;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        color: #64748b;
+    }
+</style>
+
+<div class="contact-hero">
+    <div class="gold-line"></div>
+    <h1 class="fw-900 mb-2" style="background:linear-gradient(to bottom,#fff 30%,#d4af37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2.8rem;" id="ct-title">BİZE ULAŞIN</h1>
+    <p class="text-white-50" style="letter-spacing:3px;font-size:0.8rem;" id="ct-sub">7/24 HİZMETİNİZDEYİZ</p>
+</div>
+
+<div class="container pb-5">
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                <h5 class="text-white fw-700 mb-2" id="ct-phone-title">Telefon</h5>
+                <p class="text-white-50 mb-0">+90 362 XXX XX XX</p>
+                <p class="text-white-50">+90 5XX XXX XX XX</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                <h5 class="text-white fw-700 mb-2" id="ct-addr-title">Adres</h5>
+                <p class="text-white-50 mb-0" id="ct-addr">Türkiye Geneli</p>
+                <p class="text-white-50">81 İl'de Hizmet</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                <h5 class="text-white fw-700 mb-2" id="ct-email-title">E-posta</h5>
+                <p class="text-white-50 mb-0">info@kingoresort.com</p>
+                <p class="text-white-50">destek@kingoresort.com</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-lg-6">
+            <div class="contact-form-wrap">
+                <h4 class="text-white fw-700 mb-4" id="ct-form-title">Mesaj Gönderin</h4>
+                <div class="mb-3">
+                    <input type="text" class="form-field" id="ct-name" placeholder="Adınız Soyadınız">
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-field" id="ct-email" placeholder="E-posta Adresiniz">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-field" id="ct-subject" placeholder="Konu">
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-field" id="ct-message" rows="5" placeholder="Mesajınız..."></textarea>
+                </div>
+                <button class="btn-send" id="ct-send-btn" onclick="sendMessage()">GÖNDER</button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="map-wrap">
+                <div class="map-placeholder">
+                    <i class="bi bi-map fs-1 mb-3" style="color:#d4af37;opacity:0.5;"></i>
+                    <p class="text-white-50 small" id="ct-map-text">Türkiye Geneli — 81 İl</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <div class="text-center">
+                            <div style="font-size:1.5rem;color:#d4af37;">🏨</div>
+                            <div class="text-white-50" style="font-size:0.7rem;" id="ct-map-hotels">Otellerimiz</div>
+                        </div>
+                        <div class="text-center">
+                            <div style="font-size:1.5rem;color:#d4af37;">📍</div>
+                            <div class="text-white-50" style="font-size:0.7rem;" id="ct-map-loc">Merkezi Konumlar</div>
+                        </div>
+                        <div class="text-center">
+                            <div style="font-size:1.5rem;color:#d4af37;">⭐</div>
+                            <div class="text-white-50" style="font-size:0.7rem;" id="ct-map-star">5 Yıldızlı Hizmet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function sendMessage() {
+        const name = $("#ct-name").val();
+        const email = $("#ct-email").val();
+        const msg = $("#ct-message").val();
+        if (!name || !email || !msg) { Swal.fire('Uyarı', 'Lütfen tüm alanları doldurun.', 'warning'); return; }
+        Swal.fire({ title: 'Mesajınız İletildi!', text: 'En kısa sürede size dönüş yapacağız.', icon: 'success', background: '#0f172a', color: '#fff', confirmButtonColor: '#d4af37' });
+        $("#ct-name, #ct-email, #ct-subject, #ct-message").val('');
+    }
+
+    const ctTranslations = {
+        tr: { title:"BİZE ULAŞIN", sub:"7/24 HİZMETİNİZDEYİZ", phoneTitle:"Telefon", addrTitle:"Adres", addr:"Türkiye Geneli", emailTitle:"E-posta", formTitle:"Mesaj Gönderin", sendBtn:"GÖNDER", mapText:"Türkiye Geneli — 81 İl", mapHotels:"Otellerimiz", mapLoc:"Merkezi Konumlar", mapStar:"5 Yıldızlı Hizmet" },
+        en: { title:"CONTACT US", sub:"WE ARE AT YOUR SERVICE 24/7", phoneTitle:"Phone", addrTitle:"Address", addr:"All Over Turkey", emailTitle:"Email", formTitle:"Send a Message", sendBtn:"SEND", mapText:"All Over Turkey — 81 Cities", mapHotels:"Our Hotels", mapLoc:"Central Locations", mapStar:"5-Star Service" },
+        de: { title:"KONTAKT", sub:"24/7 FÜR SIE DA", phoneTitle:"Telefon", addrTitle:"Adresse", addr:"Ganz Türkei", emailTitle:"E-Mail", formTitle:"Nachricht senden", sendBtn:"SENDEN", mapText:"Ganz Türkei — 81 Städte", mapHotels:"Unsere Hotels", mapLoc:"Zentrale Lagen", mapStar:"5-Sterne-Service" },
+        fr: { title:"CONTACTEZ-NOUS", sub:"À VOTRE SERVICE 24H/24", phoneTitle:"Téléphone", addrTitle:"Adresse", addr:"Toute la Turquie", emailTitle:"E-mail", formTitle:"Envoyer un message", sendBtn:"ENVOYER", mapText:"Toute la Turquie — 81 Villes", mapHotels:"Nos Hôtels", mapLoc:"Emplacements Centraux", mapStar:"Service 5 Étoiles" },
+        ru: { title:"СВЯЗАТЬСЯ С НАМИ", sub:"МЫ К ВАШИМ УСЛУГАМ 24/7", phoneTitle:"Телефон", addrTitle:"Адрес", addr:"По всей Турции", emailTitle:"Эл. почта", formTitle:"Отправить сообщение", sendBtn:"ОТПРАВИТЬ", mapText:"По всей Турции — 81 город", mapHotels:"Наши Отели", mapLoc:"Центральные Локации", mapStar:"Сервис 5 Звёзд" },
+        es: { title:"CONTÁCTENOS", sub:"A SU SERVICIO 24/7", phoneTitle:"Teléfono", addrTitle:"Dirección", addr:"Toda Turquía", emailTitle:"Correo", formTitle:"Enviar Mensaje", sendBtn:"ENVIAR", mapText:"Toda Turquía — 81 Ciudades", mapHotels:"Nuestros Hoteles", mapLoc:"Ubicaciones Centrales", mapStar:"Servicio 5 Estrellas" }
+    };
+    function applyCtLang(lang) {
+        const t = ctTranslations[lang] || ctTranslations['tr'];
+        $("#ct-title").text(t.title); $("#ct-sub").text(t.sub);
+        $("#ct-phone-title").text(t.phoneTitle); $("#ct-addr-title").text(t.addrTitle);
+        $("#ct-addr").text(t.addr); $("#ct-email-title").text(t.emailTitle);
+        $("#ct-form-title").text(t.formTitle); $("#ct-send-btn").text(t.sendBtn);
+        $("#ct-map-text").text(t.mapText); $("#ct-map-hotels").text(t.mapHotels);
+        $("#ct-map-loc").text(t.mapLoc); $("#ct-map-star").text(t.mapStar);
+    }
+    $(document).ready(function() {
+        applyCtLang(localStorage.getItem('selectedLang') || 'tr');
+        window.setLanguage = function(l) { applyCtLang(l); };
+    });
+</script>
+}

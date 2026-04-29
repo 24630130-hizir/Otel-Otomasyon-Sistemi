@@ -1,0 +1,62 @@
+@model List<dynamic>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Oda Yönetimi";
+}
+
+<div class="panel-card">
+    <div class="panel-card-header">
+        <h6><i class="bi bi-door-open-fill me-2"></i>Tüm Odalar</h6>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;">@Model.Count oda</span>
+    </div>
+    <div style="overflow-x:auto;">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Oda No</th><th>Otel</th><th>Şehir</th><th>Kapasite</th><th>Fiyat</th><th>Cephe</th><th>Durum</th><th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var o in Model)
+                {
+                    var durumColor = o.Durum == "Boş" ? "#10b981" : o.Durum == "Dolu" ? "#ef4444" : "#f59e0b";
+                    <tr>
+                        <td style="color:#475569;font-weight:700;">@o.Id</td>
+                        <td style="color:var(--gold);font-weight:800;">@o.OdaNo</td>
+                        <td style="font-weight:600;">@o.OtelAd</td>
+                        <td style="color:rgba(255,255,255,0.5);font-size:0.78rem;">@o.SehirAd</td>
+                        <td style="color:rgba(255,255,255,0.7);">@o.Kapasite kişi</td>
+                        <td style="color:var(--gold);font-weight:700;">@o.Fiyat.ToString("N0") TL</td>
+                        <td style="color:rgba(255,255,255,0.6);font-size:0.78rem;">@o.Cephe</td>
+                        <td>
+                            <span style="background:@(durumColor)22;color:@durumColor;padding:3px 10px;border-radius:20px;font-size:0.68rem;font-weight:700;">@o.Durum</span>
+                        </td>
+                        <td>
+                            <form method="post" action="/Admin/OdaDurumGuncelle" style="display:inline-flex;gap:6px;align-items:center;">
+                                <input type="hidden" name="id" value="@o.Id" />
+                                @{
+                                    var mevcut = o.Durum?.ToString() ?? "";
+                                    var opts = new[] { "Boş", "Dolu", "Bakımda" };
+                                }
+                                <select name="yeniDurum" class="form-dark" style="width:auto;padding:4px 8px;font-size:0.75rem;">
+                                    @foreach (var opt in opts)
+                                    {
+                                        if (opt == mevcut)
+                                        {
+                                            @Html.Raw($"<option value=\"{opt}\" selected>{opt}</option>")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw($"<option value=\"{opt}\">{opt}</option>")
+                                        }
+                                    }
+                                </select>
+                                <button type="submit" class="btn-outline-gold-sm">Güncelle</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

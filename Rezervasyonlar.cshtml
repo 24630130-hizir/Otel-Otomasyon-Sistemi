@@ -1,0 +1,38 @@
+@model List<dynamic>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Rezervasyonlar";
+}
+
+<div class="panel-card">
+    <div class="panel-card-header">
+        <h6><i class="bi bi-calendar-check-fill me-2"></i>Tüm Rezervasyonlar</h6>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;">@Model.Count kayıt</span>
+    </div>
+    <div style="overflow-x:auto;">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#</th><th>Müşteri</th><th>Kullanıcı</th><th>Otel / Şehir</th><th>Oda</th><th>Giriş</th><th>Çıkış</th><th>Tutar</th><th>Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    var dc = r.Durum == "Aktif" ? "#10b981" : r.Durum == "İptal Edildi" ? "#ef4444" : r.Durum == "OdaKapatildi" ? "#f59e0b" : r.Durum == "Açığa Alındı" ? "#6366f1" : "#64748b";
+                    <tr>
+                        <td style="color:#475569;font-weight:700;">#@r.Id</td>
+                        <td style="font-weight:600;">@r.MusteriAd</td>
+                        <td style="color:rgba(255,255,255,0.5);font-size:0.78rem;">@r.KullaniciAd</td>
+                        <td style="font-size:0.78rem;">@r.OtelAd<br><span style="color:rgba(255,255,255,0.4);">@r.SehirAd</span></td>
+                        <td style="color:var(--gold);font-weight:800;">@r.OdaNo</td>
+                        <td style="color:rgba(255,255,255,0.7);">@r.Giris</td>
+                        <td style="color:rgba(255,255,255,0.7);">@r.Cikis</td>
+                        <td style="color:var(--gold);font-weight:700;">@r.Tutar TL</td>
+                        <td><span style="background:@(dc)22;color:@dc;padding:3px 10px;border-radius:20px;font-size:0.68rem;font-weight:700;">@r.Durum</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
